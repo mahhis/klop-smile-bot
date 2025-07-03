@@ -11,4 +11,5 @@ export default cleanEnv(process.env, {
   MONGO: str(),
 
   OWNER_ID: str(),
+  USER_ID: str(),
 })

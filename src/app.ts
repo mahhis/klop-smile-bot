@@ -1,6 +1,7 @@
 import 'module-alias/register'
 import 'reflect-metadata'
 import 'source-map-support/register'
+/* eslint-disable sort-imports-es6-autofix/sort-imports-es6 */
 import { ignoreOld, sequentialize } from 'grammy-middlewares'
 import { run } from '@grammyjs/runner'
 import handleBalance from '@/handlers/balance'
@@ -11,9 +12,10 @@ import sendStart from '@/handlers/start'
 import bot from '@/helpers/bot'
 import i18n from '@/helpers/i18n'
 import startMongo from '@/helpers/startMongo'
+import languageMenu from '@/menus/inline/language'
 import attachUser from '@/middlewares/attachUser'
 import configureI18n from '@/middlewares/configureI18n'
-import languageMenu from '@/menus/inline/language'
+import restrictAccess from '@/middlewares/restrictAccess'
 
 async function runApp() {
   console.log('Starting app...')
@@ -25,6 +27,7 @@ async function runApp() {
     // Middlewares
     .use(sequentialize())
     .use(ignoreOld())
+    .use(restrictAccess)
     .use(attachUser)
     .use(i18n.middleware())
     .use(configureI18n)
