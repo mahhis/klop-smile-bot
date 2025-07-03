@@ -1,0 +1,35 @@
+name: English
+start: | 
+  Welcome to <b>KlopSmile</b>!
+  Here we exchange ☺️ "smiles" between each other.
+  
+  • To send smiles to the owner, type <code>/smile &lt;amount&gt;</code>
+  • To view your balance, type <code>/balance</code>
+  
+  Have fun!
+
+language: Please select a language.
+
+language_selected: <b>This bot</b> now speaks English.
+
+
+pronunciation_btn: | 
+ 🎤 pronunciation ✅
+grammar_btn: | 
+ ✏️ grammar ❌
+vocabulary_btn: | 
+ 📖 vocabulary ❌
+fluency_btn: | 
+ 🌊 fluency ❌
+lets_improve_btn: | 
+  🪲 Send KlopSmile
+  
+improving_pronunciation: | 
+  <b>Pronunciation</b>
+
+soon_avaliable: |
+ ❌ not available now  
+
+start_talk: |
+  Hello! How are you?
+ 
