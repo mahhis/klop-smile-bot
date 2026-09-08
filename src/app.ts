@@ -1,6 +1,8 @@
+import * as mongoose from 'mongoose'
 import 'module-alias/register'
 import 'reflect-metadata'
 import 'source-map-support/register'
+import { activity, createLifecycle } from '@/helpers/lifecycle'
 /* eslint-disable sort-imports-es6-autofix/sort-imports-es6 */
 import { ignoreOld, sequentialize } from 'grammy-middlewares'
 import { run } from '@grammyjs/runner'
@@ -17,7 +19,16 @@ import attachUser from '@/middlewares/attachUser'
 import configureI18n from '@/middlewares/configureI18n'
 import restrictAccess from '@/middlewares/restrictAccess'
 
+const lifecycle = createLifecycle({
+  ready: () => mongoose.connection.readyState === 1,
+  close: async () => {
+    await mongoose.connection.close()
+  },
+})
+
 async function runApp() {
+  await lifecycle.open()
+  bot.use(activity.middleware())
   console.log('Starting app...')
   // Mongo
   await startMongo()
@@ -43,7 +54,7 @@ async function runApp() {
   bot.catch(console.error)
   // Start bot
   await bot.init()
-  run(bot)
+  lifecycle.launch(() => run(bot))
   console.info(`Bot ${bot.botInfo.username} is up and running`)
 }
 
